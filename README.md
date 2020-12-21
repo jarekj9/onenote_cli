@@ -1,7 +1,7 @@
 Project uses microsoft graph (see https://developer.microsoft.com/en-us/graph/graph-explorer)
 
 To download note book use:
-```.onenote.py -u 'username@outlook.com'```
+```./onenote.py -u 'username@outlook.com'```
 
 To browse chech help with '-h' flag.
 
