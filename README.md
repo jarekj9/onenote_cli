@@ -4,7 +4,7 @@ It requires, that account has specific permissions to onenote ( https://docs.mic
 To download note book use:
 ```./onenote.py -u 'username@outlook.com'```
 
-To browse chech help with '-h' flag.
+To browse downloaded notebook, check available options in help ('-h' flag).
 
 Example - show page with title 'cron' in notebook section 'LINUX':
 
