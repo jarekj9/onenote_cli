@@ -1,4 +1,5 @@
-Project uses microsoft graph (see https://developer.microsoft.com/en-us/graph/graph-explorer)
+Project uses microsoft graph ( https://developer.microsoft.com/en-us/graph/graph-explorer )
+It requires, that account has specific permissions to onenote ( https://docs.microsoft.com/en-us/graph/permissions-reference )
 
 To download note book use:
 ```./onenote.py -u 'username@outlook.com'```
