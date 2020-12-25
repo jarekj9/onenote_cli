@@ -1,7 +1,5 @@
-xclip
 pyperclip
 bs4
 msal
-atexit
 requests
 python-dateutil
