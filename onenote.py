@@ -25,7 +25,7 @@ class OneNoteDownload:
         self.logger = setup_logger()
         access_token = self.get_access_token()
         self.headers = {'Authorization': f'{access_token}'}
-        self.section_ids = self._get_sections_ids()
+        self.section_data = self._get_sections_data()
 
     def get_access_token(self):
         '''Get access token from cache or request new'''
@@ -64,47 +64,47 @@ class OneNoteDownload:
             print(token_response.get("error_description"))
             print(token_response.get("correlation_id"))
 
-    def _get_sections_ids(self):
-        '''Returns dict with mapping: {section name: section id}'''
-        section_ids = {}
+    def _get_sections_data(self):
+        '''Returns dict with mapping: {section name: section data}'''
+        sections_data = {}
         next_link = self.URL_SECTIONS
 
         while next_link:
             for attempt in range(3):
                 try:
-                    section_ids = self._get_section_ids_from_link(section_ids, next_link)
+                    sections_data.update(self._get_sections_data_from_link(next_link))
                 except Exception as e:
                     self.logger.warning(e)
                     self.logger.warning(f'Retrying {attempt} time.')
                     time.sleep(2)
 
-            sections_dict = self._get_sections_dict_from_link(next_link)
+            sections_dict = self._load_response_json(next_link)
             next_link = sections_dict.get('@odata.nextLink')
 
-        return section_ids
+        return sections_data
     
-    def _get_section_ids_from_link(self, section_ids, link):
-        sections_dict = self._get_sections_dict_from_link(link)
-        for section_data in sections_dict['value']:
-            name = section_data["displayName"]
-            if name in section_ids:  # if sections are duplicated
-                existing_date = parser.isoparse(section_ids[name]["lastModifiedDateTime"])
-                new_date = parser.isoparse(section_data["lastModifiedDateTime"])
+    def _get_sections_data_from_link(self, link):
+        sections_data = {}
+        sections = self._load_response_json(link)
+        for section in sections['value']:
+            section_name = section["displayName"]
+            if section_name in sections_data:  # if sections are duplicated
+                existing_date = parser.isoparse(sections_data[section_name]["lastModifiedDateTime"])
+                new_date = parser.isoparse(section["lastModifiedDateTime"])
                 if new_date > existing_date:
-                    section_ids[name] = section_data
+                    sections_data[section_name] = section
             else:
-                section_ids[name] = section_data
-        return section_ids
+                sections_data[section_name] = section
+        return sections_data
 
-    def _get_sections_dict_from_link(self, link):
+    def _load_response_json(self, link):
         resp = requests.get(link, headers=self.headers)
         return json.loads(resp.text)
 
-
     def get_pages(self, section_name):
         '''Returns dict with mapping: {page title: page id}'''
-        section_id = self.section_ids.get(section_name).get('id')
-        pages = {}
+        section_id = self.section_data.get(section_name).get('id')
+        all_pages = {}
         next_link = f'{self.URL_SECTIONS}/{section_id}/pages'
 
         while next_link:
@@ -112,30 +112,37 @@ class OneNoteDownload:
 
             for attempt in range(3):
                 try:
-                    resp = requests.get(next_link, headers=self.headers)
-                    pages_response = json.loads(resp.text)
-                    for pages_data in pages_response.get('value'):
-                        pages[pages_data.get("title")] = pages_data.get("id")
+                    pages_response = self._get_pages_from_link(next_link)
+                    all_pages.update(pages_response)
                     break
                 except Exception as e:
                     self.logger.warning(e)
                     self.logger.warning(resp.text)
                     self.logger.warning(f'Retrying {attempt} time.')
                     time.sleep(2)
-
             next_link = pages_response.get('@odata.nextLink')
 
+        return all_pages
+
+    def _get_pages_from_link(self, link):
+        pages = {}
+        resp = requests.get(link, headers=self.headers)
+        pages_response = json.loads(resp.text)
+        for pages_data in pages_response.get('value'):
+            pages[pages_data.get("title")] = pages_data.get("id")
         return pages
 
     def get_note_text(self, note_id):
-        '''Gets full note with html'''
-        resp = requests.get(f'{self.URL_PAGES}/{note_id}/content', headers=self.headers)
-        soup = BeautifulSoup(resp.text, features='lxml')
+        '''Not used yet'''
+        html = self.get_note_html(note_id)
+        soup = BeautifulSoup(html, features='lxml')
         return soup.text
 
-    def get_note(self, page_id):
-        '''Gets text without html from a note'''
-        resp = requests.get(f'{self.URL_PAGES}/{page_id}/content', headers=self.headers)
+    def get_note_html(self, note_id):
+        '''Not used yet'''
+        resp = requests.get(f'{self.URL_PAGES}/{note_id}/content', headers=self.headers)
+        with open('page.txt', 'w') as f:
+            f.write(resp.text)
         return resp.text
 
 
@@ -280,13 +287,13 @@ if __name__ == '__main__':
     if args.user:
         started_at = time.monotonic()
         onenote = OneNoteDownload(args.user)
-        for section_name, section_dict in onenote.section_ids.items():
+        for section_name, section_dict in onenote.section_data.items():
             print(f"Reading section: {section_name}, {section_dict['id']}")
             pages = onenote.get_pages(section_name)
             all_section_notes = {}
             for title, page_id in pages.items():
                 print(f'Reading page: {title}')
-                all_section_notes[title] = onenote.get_note(page_id)
+                all_section_notes[title] = onenote.get_note_html(page_id)
                 with shelve.open('shelve.lib') as lib:
                     lib[section_name] = all_section_notes
 

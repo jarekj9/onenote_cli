@@ -1,0 +1,74 @@
+{
+	"@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('j-jan%40outlook.com')/onenote/sections('0-532C157978C64B21%219806')/pages",
+	"value": [
+		{
+			"id": "page1_id",
+			"self": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/pages/0-0da18a67ea6108931754b5dbcfbffc35!1-532C157978C64B21!9806",
+			"createdDateTime": "2019-04-27T17:05:29Z",
+			"title": "title1",
+			"createdByAppId": "",
+			"contentUrl": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/pages/0-0da18a67ea6108931754b5dbcfbffc35!1-532C157978C64B21!9806/content",
+			"lastModifiedDateTime": "2020-11-25T16:08:18Z",
+			"links": {
+				"oneNoteClientUrl": {
+					"href": "onenote:https://d.docs.live.net/532c157978c64b21/Dokumenty/onenote/APACHE%20HTML%20etc.one#Apache%20https%20and%20redirect%20http&section-id=6ebb3082-3dd2-43d8-a6e0-e66b70b51125&page-id=28ca5332-149f-4ae7-a3ee-b817359d2393&end"
+				},
+				"oneNoteWebUrl": {
+					"href": "https://onedrive.live.com/redir.aspx?cid=532c157978c64b21&page=edit&resid=532C157978C64B21!113&parId=532C157978C64B21!108&wd=target%28APACHE%20HTML%20etc.one%7C6ebb3082-3dd2-43d8-a6e0-e66b70b51125%2FApache%20https%20and%20redirect%20http%7C28ca5332-149f-4ae7-a3ee-b817359d2393%2F%29"
+				}
+			},
+			"parentSection@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('j-jan%40outlook.com')/onenote/sections('0-532C157978C64B21%219806')/pages('0-0da18a67ea6108931754b5dbcfbffc35%211-532C157978C64B21%219806')/parentSection/$entity",
+			"parentSection": {
+				"id": "0-532C157978C64B21!9806",
+				"displayName": "APACHE HTML etc",
+				"self": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/sections/0-532C157978C64B21!9806"
+			}
+		},
+		{
+			"id": "page2_id",
+			"self": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/pages/0-041ed45d37594ab7a4d064a700c9fba1!226-532C157978C64B21!9806",
+			"createdDateTime": "2020-07-10T08:23:47Z",
+			"title": "title2",
+			"createdByAppId": "",
+			"contentUrl": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/pages/0-041ed45d37594ab7a4d064a700c9fba1!226-532C157978C64B21!9806/content",
+			"lastModifiedDateTime": "2020-08-23T17:07:19Z",
+			"links": {
+				"oneNoteClientUrl": {
+					"href": "onenote:https://d.docs.live.net/532c157978c64b21/Dokumenty/onenote/APACHE%20HTML%20etc.one#installation&section-id=6ebb3082-3dd2-43d8-a6e0-e66b70b51125&page-id=c6267cd7-332b-4a07-9477-80481f72b71e&end"
+				},
+				"oneNoteWebUrl": {
+					"href": "https://onedrive.live.com/redir.aspx?cid=532c157978c64b21&page=edit&resid=532C157978C64B21!113&parId=532C157978C64B21!108&wd=target%28APACHE%20HTML%20etc.one%7C6ebb3082-3dd2-43d8-a6e0-e66b70b51125%2Finstallation%7Cc6267cd7-332b-4a07-9477-80481f72b71e%2F%29"
+				}
+			},
+			"parentSection@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('j-jan%40outlook.com')/onenote/sections('0-532C157978C64B21%219806')/pages('0-041ed45d37594ab7a4d064a700c9fba1%21226-532C157978C64B21%219806')/parentSection/$entity",
+			"parentSection": {
+				"id": "0-532C157978C64B21!9806",
+				"displayName": "APACHE HTML etc",
+				"self": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/sections/0-532C157978C64B21!9806"
+			}
+		},
+		{
+			"id": "page3_id",
+			"self": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/pages/0-5a1ebe458d8b4e0fbbf8648a06cebd56!61-532C157978C64B21!9806",
+			"createdDateTime": "2020-07-13T12:42:37Z",
+			"title": "title3",
+			"createdByAppId": "",
+			"contentUrl": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/pages/0-5a1ebe458d8b4e0fbbf8648a06cebd56!61-532C157978C64B21!9806/content",
+			"lastModifiedDateTime": "2020-07-13T12:43:27Z",
+			"links": {
+				"oneNoteClientUrl": {
+					"href": "onenote:https://d.docs.live.net/532c157978c64b21/Dokumenty/onenote/APACHE%20HTML%20etc.one#bootstrap&section-id=6ebb3082-3dd2-43d8-a6e0-e66b70b51125&page-id=c2d0e7cc-b6c1-4bfd-bb7e-3d2fc0a23fd6&end"
+				},
+				"oneNoteWebUrl": {
+					"href": "https://onedrive.live.com/redir.aspx?cid=532c157978c64b21&page=edit&resid=532C157978C64B21!113&parId=532C157978C64B21!108&wd=target%28APACHE%20HTML%20etc.one%7C6ebb3082-3dd2-43d8-a6e0-e66b70b51125%2Fbootstrap%7Cc2d0e7cc-b6c1-4bfd-bb7e-3d2fc0a23fd6%2F%29"
+				}
+			},
+			"parentSection@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('j-jan%40outlook.com')/onenote/sections('0-532C157978C64B21%219806')/pages('0-5a1ebe458d8b4e0fbbf8648a06cebd56%2161-532C157978C64B21%219806')/parentSection/$entity",
+			"parentSection": {
+				"id": "0-532C157978C64B21!9806",
+				"displayName": "APACHE HTML etc",
+				"self": "https://graph.microsoft.com/v1.0/users/j-jan@outlook.com/onenote/sections/0-532C157978C64B21!9806"
+			}
+		}
+	]
+}

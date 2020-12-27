@@ -1,0 +1,95 @@
+{
+	"@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('tes%40outlook.com')/onenote/sections",
+	"value": [
+		{
+			"id": "0-532C157978C64B21!9806",
+			"self": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/sections/0-532C157978C64B21!9807",
+			"createdDateTime": "2018-08-10T11:15:08.277Z",
+			"displayName": "SECTION NAME 1",
+			"lastModifiedDateTime": "2020-12-01T13:52:51.45Z",
+			"isDefault": false,
+			"pagesUrl": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/sections/0-532C157978C64B21!9807/pages",
+			"createdBy": {
+				"user": {
+					"id": "532C157978C64B22",
+					"displayName": "User Name"
+				}
+			},
+			"lastModifiedBy": {
+				"user": {
+					"id": "532C157978C64B22",
+					"displayName": "User Name"
+				}
+			},
+			"parentNotebook@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('test%40outlook.com')/onenote/sections('0-532C157978C64B21%219807')/parentNotebook/$entity",
+			"parentNotebook": {
+				"id": "0-532C157978C64B21!113",
+				"displayName": "onenote",
+				"self": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/notebooks/0-532C157978C64B21!117"
+			},
+			"parentSectionGroup@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('test%40outlook.com')/onenote/sections('0-532C157978C64B21%219807')/parentSectionGroup/$entity",
+			"parentSectionGroup": null
+		},
+
+		{
+			"id": "0-532C157978C64B21!10047",
+			"self": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/sections/0-532C157978C64B21!10047",
+			"createdDateTime": "2019-04-11T12:38:08.06Z",
+			"displayName": "SECTION NAME 2",
+			"lastModifiedDateTime": "2020-05-21T10:56:21.017Z",
+			"isDefault": false,
+			"pagesUrl": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/sections/0-532C157978C64B21!10047/pages",
+			"createdBy": {
+				"user": {
+					"id": "532C157978C64B22",
+					"displayName": "User Name"
+				}
+			},
+			"lastModifiedBy": {
+				"user": {
+					"id": "532C157978C64B22",
+					"displayName": "User Name"
+				}
+			},
+			"parentNotebook@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('test%40outlook.com')/onenote/sections('0-532C157978C64B21%2110047')/parentNotebook/$entity",
+			"parentNotebook": {
+				"id": "0-532C157978C64B21!113",
+				"displayName": "onenote",
+				"self": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/notebooks/0-532C157978C64B21!117"
+			},
+			"parentSectionGroup@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('test%40outlook.com')/onenote/sections('0-532C157978C64B21%2110047')/parentSectionGroup/$entity",
+			"parentSectionGroup": null
+		},
+		{
+			"id": "0-532C157978C64B21!9327",
+			"self": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/sections/0-532C157978C64B21!9327",
+			"createdDateTime": "2018-01-08T07:33:21.29Z",
+			"displayName": "SECTION NAME 3",
+			"lastModifiedDateTime": "2020-12-25T23:49:44.907Z",
+			"isDefault": false,
+			"pagesUrl": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/sections/0-532C157978C64B21!9327/pages",
+			"createdBy": {
+				"user": {
+					"id": "532C157978C64B22",
+					"displayName": "User Name"
+				}
+			},
+			"lastModifiedBy": {
+				"user": {
+					"id": "532C157978C64B22",
+					"displayName": "User Name"
+				}
+			},
+			"parentNotebook@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('test%40outlook.com')/onenote/sections('0-532C157978C64B21%219327')/parentNotebook/$entity",
+			"parentNotebook": {
+				"id": "0-532C157978C64B21!113",
+				"displayName": "onenote",
+				"self": "https://graph.microsoft.com/v1.0/users/test@outlook.com/onenote/notebooks/0-532C157978C64B21!117"
+			},
+			"parentSectionGroup@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('test%40outlook.com')/onenote/sections('0-532C157978C64B21%219327')/parentSectionGroup/$entity",
+			"parentSectionGroup": null
+		}
+
+	],
+	"@odata.nextLink": "https://load_part_2......"
+}
