@@ -1,10 +1,19 @@
+#!/usr/bin/env python3
+
+import sys
 import unittest
 from unittest.mock import patch
 from unittest import mock
+import os.path
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+)
 from onenote import OneNoteDownload
 
 
 class TestOneNoteDownload(unittest.TestCase):
+
+    TEST_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'test'))
 
     @patch('onenote.requests.get')
     @patch('onenote.OneNoteDownload.get_access_token')
@@ -78,3 +87,6 @@ class TestOneNoteDownload(unittest.TestCase):
 
         note_text = onenote.get_note_text('test_id')
         self.assertEqual(note_text, expected_note_text)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -2,3 +2,4 @@ token_cache.bin
 shelve.lib
 logfile.log
 Pipfile
+__pycache__

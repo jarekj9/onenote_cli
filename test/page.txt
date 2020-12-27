@@ -1,0 +1,15 @@
+<html lang="pl-PL">
+	<head>
+		<title>Page title</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="created" content="2019-04-27T19:05:00.0000000" />
+	</head>
+	<body data-absolute-enabled="true" style="font-family:Calibri;font-size:11pt">
+		<div style="position:absolute;left:48px;top:115px;width:624px">
+			<p style="margin-top:0pt;margin-bottom:0pt"><span style="font-family:Courier New;color:black;background-color:white;font-weight:bold">Header</span></p>
+			<br />
+			<p style="margin-top:0pt;margin-bottom:0pt"><span style="font-family:Consolas;color:black;background-color:white">Note text</span></p>
+			<br />
+		</div>
+	</body>
+</html>
