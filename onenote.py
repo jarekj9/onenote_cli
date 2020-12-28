@@ -173,7 +173,7 @@ class OneNoteOffline:
     def _display_titles_with_keyword_in_page(self, keyword):
         print('Following titles have  been found:')
         for section_name in self.notes:
-            titles_with_keyword_in_page = self._find_titles_with_keyword_in_page(section_name, args.find)
+            titles_with_keyword_in_page = self._find_titles_with_keyword_in_page(section_name, keyword)
             if titles_with_keyword_in_page:
                 print(f'##### SECTION: {section_name} #####')
                 for title in titles_with_keyword_in_page:
@@ -183,7 +183,7 @@ class OneNoteOffline:
         print('\n'.join(self.notes.keys()))
 
     def _print_all_titles_in_section(self, section_name):
-        print('\n'.join(self.notes[args.section].keys()))
+        print('\n'.join(self.notes[section_name].keys()))
 
     def _print_note(self, section_name, title):
         '''Shows specific note. If more sections match it only shows
@@ -224,7 +224,7 @@ class OneNoteOffline:
             soup = BeautifulSoup(self.notes[section][title], features='lxml')
             print(soup.text)
 
-    def display_notes(self):
+    def display_notes(self, args):
         if args.find:
             self._display_titles_with_keyword_in_page(args.find)
         elif args.allsections:
@@ -302,4 +302,4 @@ if __name__ == '__main__':
         print(f'Finished in {time_taken} minutes')
 
     else:
-        OneNoteOffline().display_notes()
+        OneNoteOffline().display_notes(args)
