@@ -5,7 +5,7 @@ import io
 import shelve
 import logging
 import unittest
-from unittest.mock import patch, call
+from unittest.mock import patch
 from unittest import mock
 import os.path
 sys.path.append(
@@ -15,6 +15,7 @@ from onenote import OneNoteDownload, OneNoteOffline
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 log = logging.getLogger("TestLog")
+
 
 class TestOneNoteDownload(unittest.TestCase):
 
@@ -45,7 +46,7 @@ class TestOneNoteDownload(unittest.TestCase):
             'https://load_part_2',
             headers={'Authorization': str(get_access_token_mock())}
         )
-        for section_number in range(1,7):
+        for section_number in range(1, 7):
             assert(onenote.section_data.get(f'SECTION NAME {section_number}'))
 
     @patch('onenote.OneNoteDownload._get_sections_data')
@@ -57,8 +58,7 @@ class TestOneNoteDownload(unittest.TestCase):
                        get_sections_data_mock):
         onenote = OneNoteDownload('test@outlook.com')
         onenote.section_data = {
-            'SECTION NAME 1':
-                             {'id': 'section 1 id'}
+            'SECTION NAME 1': {'id': 'section 1 id'}
         }
 
         with open('pages_list_response_fixture_part1.txt') as f:
@@ -93,8 +93,6 @@ class TestOneNoteDownload(unittest.TestCase):
             headers={'Authorization': str(get_access_token_mock())}
         )
 
-
-
     @patch('onenote.OneNoteDownload._get_sections_data')
     @patch('onenote.requests.get')
     @patch('onenote.OneNoteDownload.get_access_token')
@@ -118,7 +116,7 @@ class TestOneNoteDownload(unittest.TestCase):
 
 
 class TestOneNoteOffline(unittest.TestCase):
-    
+
     @classmethod
     def setUpClass(cls):
         with shelve.open('shelve_fixture.lib') as lib:

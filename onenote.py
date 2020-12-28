@@ -98,7 +98,7 @@ class OneNoteDownload:
             next_link = sections_dict.get('@odata.nextLink')
 
         return sections_data
-    
+
     def _get_sections_data_from_link(self, link):
         sections_data = {}
         sections = self._get_response_json(link)
@@ -132,7 +132,6 @@ class OneNoteDownload:
                     break
                 except Exception as e:
                     self.logger.warning(e)
-                    self.logger.warning(resp.text)
                     self.logger.warning(f'Retrying {attempt} time.')
                     time.sleep(2)
             pages_response = self._get_response_json(next_link)
@@ -251,6 +250,7 @@ class OneNoteOffline:
         elif args.title:
             self._print_titles_with_keyword(args.title)
 
+
 def setup_logger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
@@ -259,6 +259,7 @@ def setup_logger():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
     return logger
+
 
 def parse_arguments():
     arg_parser = argparse.ArgumentParser(
@@ -270,14 +271,14 @@ def parse_arguments():
         '-t',
         default=False,
         help='Find keyword in titles and display the page (if there is only one matching). '
-            +'Can use with together with -s to show page from specific section.'
+             'Can use with together with -s to show page from specific section.'
     )
     arg_parser.add_argument(
         '--section',
         '-s',
         default=False,
         help='Section can be provided together with with -t to print specific page '
-            +'or with --alltitles to print all titles in specific section'
+             'or with --alltitles to print all titles in specific section'
     )
     arg_parser.add_argument(
         '--find',

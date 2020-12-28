@@ -3,3 +3,4 @@ shelve.lib
 logfile.log
 Pipfile
 __pycache__
+.coverage
