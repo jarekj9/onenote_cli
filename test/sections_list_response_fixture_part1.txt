@@ -91,5 +91,5 @@
 		}
 
 	],
-	"@odata.nextLink": "https://load_part_2......"
+	"@odata.nextLink": "https://load_part_2"
 }

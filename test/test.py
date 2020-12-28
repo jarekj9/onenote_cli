@@ -5,7 +5,7 @@ import io
 import shelve
 import logging
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, call
 from unittest import mock
 import os.path
 sys.path.append(
@@ -23,9 +23,9 @@ class TestOneNoteDownload(unittest.TestCase):
     def test_get_sections_data(self,
                                get_access_token_mock,
                                requests_get_mock):
-        with open('sections_list_response_fixture1.txt') as f:
+        with open('sections_list_response_fixture_part1.txt') as f:
             sections_fixture_part1 = f.read()
-        with open('sections_list_response_fixture2.txt') as f:
+        with open('sections_list_response_fixture_part2.txt') as f:
             sections_fixture_part2 = f.read()
 
         mockresponse1 = mock.Mock()
@@ -40,6 +40,11 @@ class TestOneNoteDownload(unittest.TestCase):
         ]
 
         onenote = OneNoteDownload('test@outlook.com')
+
+        requests_get_mock.assert_called_with(
+            'https://load_part_2',
+            headers={'Authorization': str(get_access_token_mock())}
+        )
         for section_number in range(1,7):
             assert(onenote.section_data.get(f'SECTION NAME {section_number}'))
 
@@ -56,19 +61,39 @@ class TestOneNoteDownload(unittest.TestCase):
                              {'id': 'section 1 id'}
         }
 
-        with open('pages_list_response_fixture.txt') as f:
-            pages_fixture = f.read()
-        mockresponse = mock.Mock()
-        mockresponse.text = pages_fixture
-        requests_get_mock.return_value = mockresponse
+        with open('pages_list_response_fixture_part1.txt') as f:
+            pages_fixture1 = f.read()
+        with open('pages_list_response_fixture_part2.txt') as f:
+            pages_fixture2 = f.read()
+
+        mockresponse1 = mock.Mock()
+        mockresponse1.text = pages_fixture1
+        mockresponse2 = mock.Mock()
+        mockresponse2.text = pages_fixture2
+        requests_get_mock.side_effect = [
+            mockresponse1,
+            mockresponse1,
+            mockresponse2,
+            mockresponse2
+        ]
 
         pages_expected_value = {
             'title1': 'page1_id',
             'title2': 'page2_id',
-            'title3': 'page3_id'
+            'title3': 'page3_id',
+            'title4': 'page4_id',
+            'title5': 'page5_id',
+            'title6': 'page6_id',
         }
+
         pages = onenote.get_pages('SECTION NAME 1')
         self.assertEqual(pages, pages_expected_value)
+        requests_get_mock.assert_called_with(
+            'https://load_part_2',
+            headers={'Authorization': str(get_access_token_mock())}
+        )
+
+
 
     @patch('onenote.OneNoteDownload._get_sections_data')
     @patch('onenote.requests.get')

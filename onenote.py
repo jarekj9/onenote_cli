@@ -64,6 +64,21 @@ class OneNoteDownload:
             print(token_response.get("error_description"))
             print(token_response.get("correlation_id"))
 
+    def download(self):
+        for section_name, section_dict in self.section_data.items():
+            print(f"Reading section: {section_name}, {section_dict['id']}")
+            pages = self.get_pages(section_name)
+            all_section_notes = {}
+            for title, page_id in pages.items():
+                print(f'Reading page: {title}')
+                all_section_notes[title] = self.get_note_html(page_id)
+                with shelve.open('shelve.lib') as lib:
+                    lib[section_name] = all_section_notes
+
+        seconds_taken = int(time.monotonic() - started_at)
+        time_taken = datetime.timedelta(seconds=seconds_taken)
+        print(f'Finished in {time_taken} minutes')
+
     def _get_sections_data(self):
         '''Returns dict with mapping: {section name: section data}'''
         sections_data = {}
@@ -73,19 +88,20 @@ class OneNoteDownload:
             for attempt in range(3):
                 try:
                     sections_data.update(self._get_sections_data_from_link(next_link))
+                    break
                 except Exception as e:
                     self.logger.warning(e)
                     self.logger.warning(f'Retrying {attempt} time.')
                     time.sleep(2)
 
-            sections_dict = self._load_response_json(next_link)
+            sections_dict = self._get_response_json(next_link)
             next_link = sections_dict.get('@odata.nextLink')
 
         return sections_data
     
     def _get_sections_data_from_link(self, link):
         sections_data = {}
-        sections = self._load_response_json(link)
+        sections = self._get_response_json(link)
         for section in sections['value']:
             section_name = section["displayName"]
             if section_name in sections_data:  # if sections are duplicated
@@ -97,7 +113,7 @@ class OneNoteDownload:
                 sections_data[section_name] = section
         return sections_data
 
-    def _load_response_json(self, link):
+    def _get_response_json(self, link):
         resp = requests.get(link, headers=self.headers)
         return json.loads(resp.text)
 
@@ -112,22 +128,21 @@ class OneNoteDownload:
 
             for attempt in range(3):
                 try:
-                    pages_response = self._get_pages_from_link(next_link)
-                    all_pages.update(pages_response)
+                    all_pages.update(self._get_pages_from_link(next_link))
                     break
                 except Exception as e:
                     self.logger.warning(e)
                     self.logger.warning(resp.text)
                     self.logger.warning(f'Retrying {attempt} time.')
                     time.sleep(2)
+            pages_response = self._get_response_json(next_link)
             next_link = pages_response.get('@odata.nextLink')
 
         return all_pages
 
     def _get_pages_from_link(self, link):
         pages = {}
-        resp = requests.get(link, headers=self.headers)
-        pages_response = json.loads(resp.text)
+        pages_response = self._get_response_json(link)
         for pages_data in pages_response.get('value'):
             pages[pages_data.get("title")] = pages_data.get("id")
         return pages
@@ -287,19 +302,6 @@ if __name__ == '__main__':
     if args.user:
         started_at = time.monotonic()
         onenote = OneNoteDownload(args.user)
-        for section_name, section_dict in onenote.section_data.items():
-            print(f"Reading section: {section_name}, {section_dict['id']}")
-            pages = onenote.get_pages(section_name)
-            all_section_notes = {}
-            for title, page_id in pages.items():
-                print(f'Reading page: {title}')
-                all_section_notes[title] = onenote.get_note_html(page_id)
-                with shelve.open('shelve.lib') as lib:
-                    lib[section_name] = all_section_notes
-
-        seconds_taken = int(time.monotonic() - started_at)
-        time_taken = datetime.timedelta(seconds=seconds_taken)
-        print(f'Finished in {time_taken} minutes')
-
+        onenote.download()
     else:
         OneNoteOffline().display_notes(args)
